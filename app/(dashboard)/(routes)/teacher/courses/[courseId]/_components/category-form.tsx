@@ -42,6 +42,7 @@ export const CategoryForm = ({
     courseId,
     options,
 }: CategoryFormProps) => {
+    console.log("Options:", options);
     const [isEditing, setIsEditing] = useState(false);
 
     const toggleEdit = () => setIsEditing((current) => !current);
@@ -67,11 +68,12 @@ export const CategoryForm = ({
         } catch (error) {
             toast.error("Something went wrong");
         }
-    };
+    };  
 
     const selectedOption = options.find(
         (option) => option.value === initialData.categoryId
     );
+    console.log("Selected Option:", selectedOption);   
 
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
@@ -111,7 +113,7 @@ export const CategoryForm = ({
                                 <FormItem>
                                     <FormControl>
                                         <Combobox
-                                            options={...options}
+                                            options={options}
                                             {...field}
                                         />
                                     </FormControl>

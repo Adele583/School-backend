@@ -47,7 +47,7 @@ export async function PATCH(
 			one of its chapters is published
 		*/
         const hasPublishedChapter = course.chapters.some(
-            (chapter) => chapter.isPublished
+            (chapter: { isPublished: any; }) => chapter.isPublished
         );
 
         /* 

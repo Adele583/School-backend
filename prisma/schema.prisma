@@ -1,12 +1,9 @@
 datasource db {
-  provider     = "mysql"
+  provider     = "postgres"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
-// We added the previewFeatures array at the 7:40:40 of the video. T
-// This makes our courses title searchable. Refer to the docs below:
-// https://www.prisma.io/docs/concepts/components/prisma-client/full-text-search
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch", "fullTextIndex"]
@@ -32,8 +29,6 @@ model Course {
   updatedAt DateTime @updatedAt
 
   @@index([categoryId])
-  // This makes our courses title searchable
-  @@fulltext([title])
 }
 
 model Category {
@@ -98,9 +93,8 @@ model UserProgress {
   isCompleted Boolean @default(false)
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 
-  // There needs to be a unique combination of userId and chapterId
   @@unique([userId, chapterId])
   @@index([chapterId])
 }
@@ -113,20 +107,17 @@ model Purchase {
   course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 
-  // @@unique: ensure that no two rows in the Purchase    
-  // table have the same combination of userId and courseId.
   @@unique([userId, courseId])
   @@index([courseId])
 }
 
-// Only one StripeCustomer per logged in user
 model StripeCustomer {
   id               String @id @default(uuid())
   userId           String @unique
   stripeCustomerId String @unique
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
