@@ -133,7 +133,8 @@ const CourseIdPage = async ({
                 { label: "No Category", value: "No Category" }, // Adding an option for no category
                 { label: "Education", value: "Education" },
                 { label: "Technology", value: "Technology" },
-                { label: "Islamic Religion", value: "Islamic Religion" },
+                { label: "Religion", value: "Religion" },
+                { label: "Sports", value: "Sports" },
                 { label: "Others", value: "Others" },
                 ...categories.map((category) => ({
                   label: category.name,

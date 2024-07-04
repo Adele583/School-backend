@@ -5,7 +5,7 @@ import { authMiddleware } from "@clerk/nextjs";
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your middleware
 
 // This is how you add unprotected route
-// export default authMiddleware({ publicRoutes: ["/test"] });
+// export default authMiddleware({ publicRoutes: ["/test"] }); 
 
 export default authMiddleware({
     publicRoutes: ["/api/webhook"],
